@@ -1,0 +1,19 @@
+{   
+    //mvn clean javafx:run
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Run AlgoLab App",
+            "request": "launch",
+            "mainClass": "com.algolab.App",
+            "projectName": "AlgoLabV2",
+            "classPaths": [
+                "$Auto"
+            ],
+            "modulePaths": [
+                "$Auto"
+            ]
+        }
+    ]
+}

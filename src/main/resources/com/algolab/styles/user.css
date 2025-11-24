@@ -1,0 +1,6 @@
+.error-field {
+    -fx-effect: dropshadow(gaussian, red, 10, 0.5, 0, 0);
+}
+.error-text {
+    -fx-text-fill: #FF4A4A;  /* bright red */
+}
