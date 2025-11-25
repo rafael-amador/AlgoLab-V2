@@ -29,11 +29,9 @@
             
             <VBox spacing="15.0">
                <children>
-                  <Label text="Email" />
-                  <TextField fx:id="gmailTextField" promptText="example@gmail.com" />
+                  <TextField fx:id="gmailTextField" promptText="Email" />
                   
-                  <Label text="Password" />
-                  <PasswordField fx:id="passwordTextField" promptText="Enter your password" />
+                  <PasswordField fx:id="passwordTextField" promptText="Password" />
                   
                   <StackPane fx:id="errorContainer" managed="false" styleClass="error-container" visible="false">
                      <children>
@@ -48,7 +46,7 @@
                   </CheckBox>
                   
                   <Button fx:id="loginButton" maxWidth="Infinity" mnemonicParsing="false" onAction="#login" text="Login" />
-                  <Button fx:id="guestButton" maxWidth="Infinity" mnemonicParsing="false" onAction="#guestSignIn" text="Continue as Guest" styleClass="ghost-button" style="-fx-background-color: transparent; -fx-border-color: #64B5F6; -fx-text-fill: #64B5F6; -fx-border-width: 1; -fx-background-radius: 6;" />
+                  <Button fx:id="guestButton" maxWidth="Infinity" mnemonicParsing="false" onAction="#guestSignIn" text="Continue as Guest" style="-fx-background-color: transparent; -fx-border-color: #64B5F6; -fx-text-fill: #64B5F6; -fx-border-width: 1; -fx-border-radius: 20;" />
                   
                   <VBox alignment="CENTER" spacing="0.0">
                      <children>

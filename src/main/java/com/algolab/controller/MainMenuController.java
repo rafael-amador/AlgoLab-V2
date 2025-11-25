@@ -106,38 +106,6 @@ public class MainMenuController {
     @FXML
     private Label statusLastSavedLabel;
 
-    
-
-    /**
-     * Logout user - clear session and return to login screen
-     */
-    @FXML
-    public void logout(ActionEvent event) {
-        // Clear session from database and local storage
-        SessionManager.logout();
-
-        // Use a known Node to obtain the Stage instead of casting the event source
-        Stage stage = null;
-        try {
-            if (menuBar != null && menuBar.getScene() != null) {
-                stage = (Stage) menuBar.getScene().getWindow();
-            } else if (statusBar != null && statusBar.getScene() != null) {
-                stage = (Stage) statusBar.getScene().getWindow();
-            } else {
-                // Fallback to event source if it's a Node
-                if (event.getSource() instanceof Node) {
-                    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                }
-            }
-
-            if (stage != null) {
-                SceneSwitcher.switchTo(stage, "login.fxml");
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-
     @FXML
     public void initialize() {
         // Set the status user label based on current session token
@@ -172,4 +140,36 @@ public class MainMenuController {
         } catch (Exception ignored) {
         }
     }
+
+    /**
+     * Logout user - clear session and return to login screen
+     */
+    @FXML
+    public void logout(ActionEvent event) {
+        // Clear session from database and local storage
+        SessionManager.logout();
+
+        // Use a known Node to obtain the Stage instead of casting the event source
+        Stage stage = null;
+        try {
+            if (menuBar != null && menuBar.getScene() != null) {
+                stage = (Stage) menuBar.getScene().getWindow();
+            } else if (statusBar != null && statusBar.getScene() != null) {
+                stage = (Stage) statusBar.getScene().getWindow();
+            } else {
+                // Fallback to event source if it's a Node
+                if (event.getSource() instanceof Node) {
+                    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                }
+            }
+
+            if (stage != null) {
+                SceneSwitcher.switchTo(stage, "login.fxml");
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    
 }

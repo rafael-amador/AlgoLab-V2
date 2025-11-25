@@ -1,7 +1,5 @@
 package com.algolab.util;
 
-import com.algolab.model.UserAccount;
-
 public class PasswordResetService {
 
     private static String email;

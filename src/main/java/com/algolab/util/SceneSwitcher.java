@@ -4,7 +4,6 @@ import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.stage.Stage;
-import com.algolab.controller.VerificationController;
 
 public class SceneSwitcher {
 

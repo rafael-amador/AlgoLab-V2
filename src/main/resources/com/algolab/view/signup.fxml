@@ -43,11 +43,9 @@
             
             <VBox maxWidth="350.0" spacing="15.0">
                <children>
-                  <Label text="Email" />
-                  <TextField fx:id="gmailTextField" promptText="example@gmail.com" />
+                  <TextField fx:id="gmailTextField" promptText="Email" />
                   
-                  <Label text="Password" />
-                  <PasswordField fx:id="passwordTextField" promptText="Create a password" />
+                  <PasswordField fx:id="passwordTextField" promptText="Password" />
                   
                   <StackPane fx:id="errorContainer" managed="false" styleClass="error-container" visible="false">
                      <children>

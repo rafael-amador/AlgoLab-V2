@@ -10,7 +10,6 @@ import com.algolab.util.SceneSwitcher;
 import com.algolab.util.EmailSender;
 import com.algolab.util.PasswordResetService;
 import com.algolab.model.UserAccount;
-import com.algolab.controller.VerifyResetCodeController;
 
 public class ForgotPasswordController {
 
