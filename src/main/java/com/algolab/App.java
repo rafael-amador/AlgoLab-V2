@@ -15,41 +15,24 @@ public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        // Clean up expired sessions on startup
-        SessionManager.cleanupExpiredSessions();
 
-        // Check for existing valid session
-        String savedToken = SessionManager.loadTokenLocally();
+        // Determine starting FXML
         String startView = "login.fxml";
 
+        String savedToken = SessionManager.loadTokenLocally();
         if (savedToken != null && SessionManager.validateSession(savedToken)) {
-            // Valid session exists, skip login
             startView = "mainMenu.fxml";
         }
 
-        java.net.URL viewUrl = App.class.getResource("/com/algolab/view/" + startView);
-        if (viewUrl == null) {
-            System.err.println("ERROR: FXML resource not found on classpath: /com/algolab/view/" + startView);
-            System.err.println("Make sure 'src/main/resources' is configured as a resource path so files are copied into '" + System.getProperty("user.dir") + "/bin' or that your build tool places resources on the classpath.");
-            throw new RuntimeException("FXML start view not found on classpath: " + startView);
-        }
+        Parent root = FXMLLoader.load(getClass().getResource("/com/algolab/view/" + startView));
 
-        Parent root = FXMLLoader.load(viewUrl);
         Scene scene = new Scene(root);
-
-        primaryStage.setTitle("Algo Lab");
-        primaryStage.setMinHeight(500);
-        primaryStage.setMinWidth(500);
-
-        // Load CSS (fail fast with clear message when resource missing)
-        java.net.URL cssUrl = getClass().getResource("/com/algolab/styles/darkTheme.css");
-        if (cssUrl == null) {
-            System.err.println("WARNING: Stylesheet not found on classpath: /com/algolab/styles/darkTheme.css");
-        } else {
-            scene.getStylesheets().add(cssUrl.toExternalForm());
-        }
+        scene.getStylesheets().add(getClass().getResource("/com/algolab/styles/darkTheme.css").toExternalForm());
 
         primaryStage.setScene(scene);
+        primaryStage.setTitle("Algo Lab");
+        primaryStage.setMinWidth(500);
+        primaryStage.setMinHeight(500);
         primaryStage.show();
     }
 }

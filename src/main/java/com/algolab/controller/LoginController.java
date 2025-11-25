@@ -29,7 +29,6 @@ public class LoginController {
 
     @FXML
     private void initialize() {
-        System.out.println("FXML loaded, controller is ready!");
         hideError(); // starts with error hidden
 
         gmailTextField.setOnAction(e -> login(e));
