@@ -19,6 +19,10 @@ public class SceneSwitcher {
         } else {
             stage.getScene().setRoot(root);
         }
+
+        if (fxml.equals("mainMenu.fxml")){
+            stage.setMaximized(true);
+        }
     }
 
     public static void switchToWithController(Stage stage, String fxml, Object controller) throws IOException {

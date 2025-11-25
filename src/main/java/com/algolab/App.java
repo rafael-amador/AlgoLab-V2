@@ -33,6 +33,16 @@ public class App extends Application {
         primaryStage.setTitle("Algo Lab");
         primaryStage.setMinWidth(500);
         primaryStage.setMinHeight(500);
+
+        primaryStage.setOnCloseRequest(event -> { //save data before closing
+            // Example: Ask for confirmation
+            // event.consume();  // prevents the window from closing
+            // showConfirmationPopup();
+
+            // Example: Clean up data
+            // SessionManager.deleteLocalToken();
+        });
+
         primaryStage.show();
     }
 }
