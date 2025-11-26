@@ -8,7 +8,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
-
+import org.apache.commons.validator.routines.EmailValidator;
 import java.io.IOException;
 import com.algolab.util.SceneSwitcher;
 import com.algolab.util.EmailSender;
@@ -105,7 +105,7 @@ public class SignupController {
         // GMAIL
         if (!isGmail(gmailTextField)) {
             showErrorHighlight(gmailTextField);
-            showError("Wrong gmail format. Example: abc123@gmail.com");
+            showError("Invalid email format. Example: user@example.com");
             isValid = false;
         } else {
             clearErrorHighlight(gmailTextField);
@@ -119,9 +119,8 @@ public class SignupController {
     }
 
     private boolean isGmail(TextField field) {
-        String email = field.getText();
-        // IMPROVED: Better email validation
-        return email.matches("^[A-Za-z0-9+_.-]+@gmail\\.com$");
+        String email = field.getText().trim();
+        return EmailValidator.getInstance().isValid(email);
     }
 
     // Password Strength Tests

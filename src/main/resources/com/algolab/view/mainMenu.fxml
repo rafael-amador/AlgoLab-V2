@@ -20,8 +20,17 @@
                     <!-- FILE -->
                     <Menu text="File">
                         <items>
-                            <MenuItem fx:id="newDatabaseMenuItem" text="New Database..."/>
-                            <MenuItem fx:id="newFolderMenuItem" text="New Folder..."/>
+                            <Menu text="New DataBase">
+                                <items>
+                                    <MenuItem text="New Array" onAction="#newArray"/>
+                                    <MenuItem text="New Linked-List" onAction="#newLinkedList"/>
+                                    <MenuItem text="New Binary-Tree" onAction="#newBinaryTree"/>
+                                    <MenuItem text="New Stack" onAction="#newStack"/>
+                                    <MenuItem text="New Queue" onAction="#newQueue"/>
+                                    <MenuItem text="New Graph" onAction="#newGraph"/>
+                                </items>
+                            </Menu>
+                            <MenuItem fx:id="newFolderMenuItem" text="New Folder..." onAction="#handleNewFolder"/>
                             <SeparatorMenuItem/>
                             <MenuItem fx:id="saveMenuItem" text="Save"/>
                             <MenuItem fx:id="saveAllMenuItem" text="Save All"/>
@@ -30,6 +39,10 @@
                             <MenuItem fx:id="exitMenuItem" text="Exit"/>
                         </items>
                     </Menu>
+
+                    <fx:define>
+                        <ToggleGroup fx:id="viewToggle"/>
+                    </fx:define>
 
                     <!-- VIEW -->
                     <Menu text="View">
@@ -84,7 +97,7 @@
                             <Label text="Databases" styleClass="panel-title"/>
                             <Region HBox.hgrow="ALWAYS"/>
                             <Button fx:id="newDatabaseButton" text="New" styleClass="accent-button"/>
-                            <Button fx:id="newFolderButton" text="Folder" styleClass="ghost-button"/>
+                            <Button fx:id="newFolderButton" text="Folder" styleClass="ghost-button" onAction="#handleNewFolder"/>
                         </HBox>
 
                         <!-- Tree of databases / folders -->
@@ -95,43 +108,25 @@
 
                 <!-- ============ Center: ACTIVE DATABASE VIEW ============ -->
                 <BorderPane fx:id="centerPanel" styleClass="panel-center">
-
-                    <!-- Active DB header -->
-                    <top>
-                        <HBox spacing="6" styleClass="center-header">
-                            <padding>
-                                <Insets top="4" right="8" bottom="4" left="8"/>
-                            </padding>
-                            <children>
-                                <Label text="Active Database:" styleClass="center-header-label"/>
-                                <Label fx:id="activeDatabaseLabel" text="None selected" styleClass="center-header-value"/>
-                                <Region HBox.hgrow="ALWAYS"/>
-                                <Label text="View:" styleClass="center-header-label"/>
-                                <ToggleButton fx:id="visualViewToggle" text="Visual" selected="true"/>
-                                <ToggleButton fx:id="tableViewToggle" text="Table"/>
-                            </children>
-                        </HBox>
-                    </top>
-
+                    
                     <!-- Tabs: Visual & Table view (we can sync with menu + toggles) -->
                     <center>
                         <TabPane fx:id="viewTabPane">
                             <tabs>
-                                <Tab fx:id="visualTab" text="Visual View" closable="false">
+                                <Tab fx:id="visualTab" text="New page" closable="true">
                                     <content>
                                         <!-- Placeholder for now: canvas / zoomable pane later -->
                                         <StackPane fx:id="visualViewContainer" styleClass="visual-placeholder">
-                                            <Label text="Visual representation coming soon..." styleClass="placeholder-text"/>
+                                            <Label text="Go to file -> create datastructure for an easy start" styleClass="placeholder-text"/>
                                         </StackPane>
                                     </content>
                                 </Tab>
-
-                                <Tab fx:id="tableTab" text="Table View" closable="false">
+                                <Tab fx:id="visualTab" text="New page" closable="true">
                                     <content>
-                                        <!-- Table will be built dynamically based on structure -->
-                                        <TableView fx:id="dataTableView">
-                                            <!-- Columns added in controller -->
-                                        </TableView>
+                                        <!-- Placeholder for now: canvas / zoomable pane later -->
+                                        <StackPane fx:id="visualViewContainer" styleClass="visual-placeholder">
+                                            <Label text="Go to file -> create datastructure for an easy start" styleClass="placeholder-text"/>
+                                        </StackPane>
                                     </content>
                                 </Tab>
                             </tabs>
@@ -147,65 +142,6 @@
                     </padding>
                     <children>
                         <Label text="Algorithms" styleClass="panel-title"/>
-
-                        <!-- Grouped algorithms -->
-                        <Accordion fx:id="algorithmAccordion" VBox.vgrow="ALWAYS">
-                            <panes>
-
-                                <TitledPane text="Insert / Delete">
-                                    <content>
-                                        <VBox spacing="2">
-                                            <padding>
-                                                <Insets top="4" right="4" bottom="4" left="4"/>
-                                            </padding>
-                                            <Button fx:id="insertButton" text="Insert..." maxWidth="Infinity"/>
-                                            <Button fx:id="deleteButton" text="Delete..." maxWidth="Infinity"/>
-                                        </VBox>
-                                    </content>
-                                </TitledPane>
-
-                                <TitledPane text="Search">
-                                    <content>
-                                        <VBox spacing="2">
-                                            <padding>
-                                                <Insets top="4" right="4" bottom="4" left="4"/>
-                                            </padding>
-                                            <Button fx:id="linearSearchButton" text="Linear Search" maxWidth="Infinity"/>
-                                            <Button fx:id="binarySearchButton" text="Binary Search" maxWidth="Infinity"/>
-                                            <Button fx:id="jumpSearchButton" text="Jump Search" maxWidth="Infinity"/>
-                                        </VBox>
-                                    </content>
-                                </TitledPane>
-
-                                <TitledPane text="Sorting">
-                                    <content>
-                                        <VBox spacing="2">
-                                            <padding>
-                                                <Insets top="4" right="4" bottom="4" left="4"/>
-                                            </padding>
-                                            <Button fx:id="bubbleSortButton" text="Bubble Sort" maxWidth="Infinity"/>
-                                            <Button fx:id="mergeSortButton" text="Merge Sort" maxWidth="Infinity"/>
-                                            <Button fx:id="quickSortButton" text="Quick Sort" maxWidth="Infinity"/>
-                                        </VBox>
-                                    </content>
-                                </TitledPane>
-
-                                <TitledPane text="Graph Traversal">
-                                    <content>
-                                        <VBox spacing="2">
-                                            <padding>
-                                                <Insets top="4" right="4" bottom="4" left="4"/>
-                                            </padding>
-                                            <Button fx:id="bfsButton" text="BFS" maxWidth="Infinity"/>
-                                            <Button fx:id="dfsButton" text="DFS" maxWidth="Infinity"/>
-                                            <Button fx:id="dijkstraButton" text="Dijkstra" maxWidth="Infinity"/>
-                                        </VBox>
-                                    </content>
-                                </TitledPane>
-
-                            </panes>
-                        </Accordion>
-
                     </children>
                 </VBox>
 
